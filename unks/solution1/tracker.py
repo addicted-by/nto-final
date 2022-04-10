@@ -1,4 +1,3 @@
-from cProfile import run
 from client2server import client2server
 
 class tracker:
@@ -45,24 +44,25 @@ class tracker:
                 dx = dx - 4096
 
             previous_dx = (dx if dx != -1536 else previous_dx)
-            instant_velocity = (dx if pos != 3 and pos != 4 and dx != -1536 else 0)
+            instant_velocity = (dx if pos != 3 and pos != 4 else 0)
+            instant_velocity = (instant_velocity if dx != -1536 else previous_velocity)
             running_velocity = gamma * instant_velocity + (1 - gamma) * previous_velocity
             current_rotation_speed = int(100 / max_speed * running_velocity)
             previous_velocity = running_velocity
 
-            tracklog.write(f"Step number: {step_counter}".encode())
-            tracklog.write(f"Time stamp: {time_stamp}".encode())
-            tracklog.write(f"Bias: {dx}".encode())
-            tracklog.write(f"State: {state}".encode())
-            tracklog.write(f"Position: {pos}".encode())
-            tracklog.write(f"Instant velocity: {instant_velocity}".encode())
-            tracklog.write(f"Running velocity: {running_velocity}".encode())
-            tracklog.write(f"Current rotation speed: {current_rotation_speed}".encode())
+            tracklog.write(f"Step number: {step_counter}\n".encode())
+            tracklog.write(f"Time stamp: {time_stamp}\n".encode())
+            tracklog.write(f"Bias: {dx}\n".encode())
+            tracklog.write(f"State: {state}\n".encode())
+            tracklog.write(f"Position: {pos}\n".encode())
+            tracklog.write(f"Instant velocity: {instant_velocity}\n".encode())
+            tracklog.write(f"Running velocity: {running_velocity}\n".encode())
+            tracklog.write(f"Current rotation speed: {current_rotation_speed}\n".encode())
 
             #max velocity = 100, no_signal = -1536
 
             if abs(running_velocity) < max_speed:
-                if abs(running_velocity) < 5:
+                if abs(running_velocity) < int(max_speed/100):
                     status = c2s.moveStop()
                 else:
                     if running_velocity > 0:
