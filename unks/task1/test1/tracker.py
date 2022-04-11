@@ -30,10 +30,10 @@ class tracker:
           if dx > 2048:
               dx = dx - 4096
 
-          tracklog.write(f"Bias: {dx}".encode())
-          tracklog.write(f"State: {state}".encode())
-          tracklog.write(f"Position: {pos}".encode())
-          tracklog.write(f"Time stamp: {time_stamp}".encode())
+          tracklog.write(f"\nBias: {dx}".encode())
+          tracklog.write(f"\nState: {state}".encode())
+          tracklog.write(f"\nPosition: {pos}".encode())
+          tracklog.write(f"\nTime stamp: {time_stamp}".encode())
           
           # * в крайнем левом + неопределенное (состояние) -- вправо на 10
           # * в крайнем правом + неопределенное (состояние) -- влево на 10
@@ -42,13 +42,13 @@ class tracker:
           # ? (2) поворачивается вправо + неопределенное (состояние или положение) -- влево на 10
           # ? (2) поворачивается влево + неопределенное (состояние или положение) -- вправо на 10
           # time_stamp неопределенное (положение или состояние) типо преграда
-          if pos == 3:
-              c2s.moveRight(10)
-          if pos == 4:
-              c2s.moveLeft(10)
+        #   if pos == 3:
+        #       c2s.moveRight(10)
+        #   if pos == 4:
+        #       c2s.moveLeft(10)
           if pos == 0 or state == 0:
-              tracklog.write(f"Pos: {pos} " + f"\nState: {state} " + 
-                                f"\nTime stamp: {time_stamp}")
+              tracklog.write((f"Pos: {pos} " + f"\nState: {state} " + 
+                                f"\nTime stamp: {time_stamp}").encode())
           if abs(dx) < 1000:
               if abs(dx) < 5:
                   c2s.moveStop()
