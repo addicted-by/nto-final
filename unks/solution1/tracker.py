@@ -3,7 +3,7 @@ from client2server import client2server
 class tracker:
     def run(tracklog):
         gamma = 0.85
-        max_speed = 1500
+        max_speed = 500
 
 
         step_counter = 0
@@ -69,5 +69,8 @@ class tracker:
                         status = c2s.moveLeft(current_rotation_speed)
                     else:
                         status = c2s.moveRight(-1*current_rotation_speed)
+            
+            else:
+                status = c2s.getStatus()
 
             step_counter += 1
