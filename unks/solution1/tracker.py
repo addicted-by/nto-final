@@ -3,7 +3,7 @@ from client2server import client2server
 class tracker:
     def run(tracklog):
         gamma = 0.85
-        max_velocity = 500
+        max_velocity = 1200
 
         last_timestamp = 0
 
@@ -45,7 +45,7 @@ class tracker:
                 dx = dx - 4096
 
             previous_dx = (dx if dx != -1536 else previous_dx)
-            instant_velocity = (dx if pos != 3 and pos != 4 else (-1)**(2 if pos == 4 else 1) * 50)
+            instant_velocity = (dx if pos != 3 and pos != 4 else (-1)**(2 if pos == 4 else 1) * 100)
             instant_velocity = (instant_velocity if dx != -1536 else previous_velocity)
             running_velocity = gamma * instant_velocity + (1 - gamma) * previous_velocity
             current_rotation_speed = int(100 / max_velocity * running_velocity)
