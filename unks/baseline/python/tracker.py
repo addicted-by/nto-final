@@ -43,3 +43,9 @@ class tracker:
                       c2s.moveLeft(5)
                   else:
                       c2s.moveRight(5)
+
+
+if __name__ == "__main__":
+    input_file = open("test_file.dt", "rb")
+    tracker = tracker()
+    tracker.run(file)

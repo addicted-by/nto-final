@@ -89,6 +89,7 @@ class client2server:
         left_obstacles.sort()
         right_obstacles.sort()
         self.obstacles_positions = np.concatenate([left_obstacles, right_obstacles])
+        self.log_file.write(f"Obstacles positions {self.obstacles_positions}\n")
 
     def getStatus(self):
         dx = self.satellite.current_position - self.radar.current_position

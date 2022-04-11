@@ -5,7 +5,6 @@ from matplotlib import pyplot as plt
 class Polygon:
     def run(self, track_file):
         c2s = client2server()
-        track_file.write(f"Obstacles positions {c2s.obstacles_positions}\n")
         radar_positions = []
         satellite_positions = []
         for current_status in c2s.iterate():
